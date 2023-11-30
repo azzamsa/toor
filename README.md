@@ -27,6 +27,10 @@ Find project root.
 
 ---
 
+Say goodbye to the tedious dance of `cd ..; cd..; cd.. (10x)` or convoluted aliases like `..`, `....`, `........`.
+Embrace simplicity with just one command -- introducing `toor`. Bind it to your favorite shell, and voila!
+A single `r` keystroke transports you straight to the root directory. Effortlessly elevate your command line experience with a touch of magic.
+
 ## Features
 
 - Fancy error message and colorful output.
@@ -37,6 +41,7 @@ Find project root.
 ```bash
 🦄 toor --help
 
+rust on master is 📦 v0.1.0 via 🦀 v1.74.0
 🦄 toor
 /home/user/playground/rust
 
@@ -48,14 +53,35 @@ Error: toor::no_project_root (link)
   help: Make sure the project root exists.
 ```
 
+### Integration With Other Tools
+
+#### Fish Shell
+
+```fish
+#
+# toor
+function r # root
+    set project_root (toor 2>/dev/null)
+
+    if test -n "$project_root"
+        # If successful, change to the project root directory
+        cd "$project_root"
+        echo "Changed to project root: $project_root"
+    else
+        # If not successful, stay in current directory
+        echo "Project root not found. I dont' go anywhere 📍"
+    end
+end
+```
+
 ## Installation
 
-### From binaries
+### From Binaries
 
 The [release page](https://github.com/azzamsa/toor/releases) includes
 pre-compiled binaries for GNU/Linux, macOS, and Windows.
 
-### From source
+### From Source
 
 Using [cargo-binstall](https://github.com/cargo-bins/cargo-binstall)
 
@@ -89,9 +115,9 @@ cargo install --path .
 
 To learn more read [the development guide](docs/dev/README.md)
 
-## Origin of the name
+## Origin of The Name
 
-The term 'toor' is a whimsical variation of 'root'."
+The term "toor" is a whimsical variation of "root".
 
 ## Credits
 
