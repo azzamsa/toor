@@ -19,7 +19,7 @@ panic = 'abort'
 
 [dependencies]
 # cli
-clap = { version = "4.4.8", features = ["suggestions", "color", "cargo", "derive"] }
+clap = { version = "4.4.8", features = ["derive"] }
 
 # error
 miette = { version = "5.10", features = ["fancy"] }
