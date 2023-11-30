@@ -6,5 +6,7 @@ pub mod error;
 pub mod exit_codes;
 pub mod output;
 
+pub mod project;
+
 // Aliases
 pub use error::Error;

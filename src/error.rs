@@ -7,15 +7,13 @@ pub enum Error {
     #[error("{0}")]
     Internal(String),
 
-    #[error("Invalid URL: {message}")]
+    #[error("Project root is not found.")]
     #[diagnostic(
-        code(toor::invalid_url),
+        code(toor::no_project_root),
         url(docsrs),
-        help(
-            "The provided URL is invalid. Double-check the URL for any typos or formatting errors."
-        )
+        help("Make sure the project root exists.")
     )]
-    InvalidUrl { message: String },
+    RootNotFound,
 }
 
 impl std::convert::From<std::io::Error> for Error {

@@ -3,7 +3,7 @@
 
 <img src='docs/logo.svg' width=80px />
 
-Get URL(s) title in any format.
+Find project root.
 
 <a href="https://github.com/azzamsa/toor/actions/workflows/ci.yml">
     <img src="https://github.com/azzamsa/toor/actions/workflows/ci.yml/badge.svg" alt="Build status" />
@@ -29,38 +29,23 @@ Get URL(s) title in any format.
 
 ## Features
 
-- Get URL(s) title in any format*.
-  - Markdown
-  - Org-mode
 - Fancy error message and colorful output.
 - Cross-platform and single binary.
-
-*Please open a PR if your favorite format doesn't exist
 
 ## Usage
 
 ```bash
 🦄 toor --help
 
-🦄 toor https://github.com/azzamsa/tin/ # Get URL title in markdown format (default).
-[GitHub - azzamsa/tin: Rust GraphQL Template 🏗](https://github.com/azzamsa/tin/)
+🦄 toor
+/home/user/playground/rust
 
-🦄 toor https://github.com/azzamsa/tin/ --max-length 16 # Limit title length
-[GitHub - azzamsa...](https://github.com/azzamsa/tin)
+~/playground
+🦄 toor
+Error: toor::no_project_root (link)
 
-🦄 toor https://github.com/azzamsa/tin/ --max-length 16 --ellipsis "***" # Use custom ellipsis
-[GitHub - azzamsa***](https://github.com/azzamsa/tin)
-
-🦄 toor https://github.com/azzamsa/tin/ --format org # Use `-f o` alias for less typing
-[[https://github.com/azzamsa/tin/][GitHub - azzamsa/tin: Rust GraphQL Template 🏗]]
-
-🦄 toor # reads from stdin
-https://github.com/azzamsa/zman
-[GitHub - azzamsa/zman: A time progress bar utilities](https://github.com/azzamsa/zman)
-https://github.com/azzamsa/tin/
-https://github.com/azzamsa/tun
-[GitHub - azzamsa/tin: Rust GraphQL Template 🏗](https://github.com/azzamsa/tin/)
-[GitHub - azzamsa/tun: Rust REST API Boilerplate 🏗](https://github.com/azzamsa/tun)
+  × Project root is not found.
+  help: Make sure the project root exists.
 ```
 
 ## Installation
@@ -106,9 +91,9 @@ To learn more read [the development guide](docs/dev/README.md)
 
 ## Origin of the name
 
-The term "toor" is a playful variation inspired by [Tupai](https://id.wikipedia.org/wiki/Tupai), which translates to "Squirrel" in English. The choice is influenced by the URL-like sound associated with the word "Squirrel".
+The term 'toor' is a whimsical variation of 'root'."
 
 ## Credits
 
-- [rexim's org-cliplink](https://github.com/rexim/org-cliplink)
+- [bbatsov's `projectile-project-root`](https://github.com/bbatsov/projectile)
 - [Noto Emoji](https://github.com/googlefonts/noto-emoji)

@@ -3,7 +3,7 @@ use std::process;
 
 use clap::Parser;
 
-use toor::{cli::Opts, config::Config, exit_codes::ExitCode, output};
+use toor::{cli::Opts, config::Config, exit_codes::ExitCode, output, project, Error};
 
 fn main() {
     let result = run();
@@ -22,5 +22,12 @@ fn run() -> miette::Result<ExitCode> {
     let _opts = Opts::parse();
     let _config = Config {};
 
-    Ok(ExitCode::Success)
+    let root = project::find_project_root();
+    match root {
+        Some(path) => {
+            output::stdout(&path.display().to_string());
+            Ok(ExitCode::Success)
+        }
+        None => Err(Error::RootNotFound.into()),
+    }
 }
