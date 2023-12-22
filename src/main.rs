@@ -19,10 +19,14 @@ fn main() {
 }
 
 fn run() -> miette::Result<ExitCode> {
-    let _opts = Opts::parse();
+    let opts = Opts::parse();
     let _config = Config {};
 
-    let root = project::find_project_root();
+    let path = match opts.path {
+        None => std::env::current_dir().unwrap(),
+        Some(p) => p,
+    };
+    let root = project::find_project_root(path);
     match root {
         Some(path) => {
             output::stdout(&path.display().to_string());

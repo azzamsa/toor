@@ -17,20 +17,18 @@ const PROJECT_ROOT_MARKS: [&str; 9] = [
     ".pijul",    // Pijul VCS root dir
 ];
 
-pub fn find_project_root() -> Option<PathBuf> {
-    let mut current_dir = std::env::current_dir().ok()?;
-
+pub fn find_project_root(mut path: PathBuf) -> Option<PathBuf> {
     loop {
         // Check if any marks exist in the current directory
         if PROJECT_ROOT_MARKS
             .iter()
-            .any(|file_name| current_dir.join(file_name).exists())
+            .any(|file_name| path.join(file_name).exists())
         {
-            return Some(current_dir);
+            return Some(path);
         }
 
         // Move to the parent directory
-        if !current_dir.pop() {
+        if !path.pop() {
             // If pop fails, we've reached the root directory
             break;
         }
