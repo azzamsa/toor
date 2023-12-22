@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2023-12-22
+
+### Features
+
+- Accept custom path ([fbbdbd5](https://github.com/azzamsa/toor/commit/fbbdbd598cf73578760589d029ad8201148fe263))
+
 ## [0.1.0] - 2023-11-30
 
 ### Features
