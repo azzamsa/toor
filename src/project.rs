@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 /// A list of files considered to mark the root of a project.
 /// https://github.com/bbatsov/projectile/blob/71f18add5e66201c3ea7c9650b848968db3aec42/projectile.el#L326
@@ -17,21 +17,21 @@ const PROJECT_ROOT_MARKS: [&str; 9] = [
     ".pijul",    // Pijul VCS root dir
 ];
 
-pub fn find_project_root(mut path: PathBuf) -> Option<PathBuf> {
-    loop {
+pub fn find_project_root(path: &Path) -> Option<PathBuf> {
+    let mut current_path = Some(path.to_path_buf());
+
+    while let Some(ref path_buf) = current_path {
         // Check if any marks exist in the current directory
         if PROJECT_ROOT_MARKS
             .iter()
-            .any(|file_name| path.join(file_name).exists())
+            .any(|file_name| path_buf.join(file_name).exists())
         {
-            return Some(path);
+            return current_path.clone();
         }
 
         // Move to the parent directory
-        if !path.pop() {
-            // If pop fails, we've reached the root directory
-            break;
-        }
+        current_path = path_buf.parent().map(|parent| parent.to_path_buf());
     }
+
     None
 }

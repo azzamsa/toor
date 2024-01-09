@@ -26,7 +26,7 @@ fn run() -> miette::Result<ExitCode> {
         None => std::env::current_dir().unwrap(),
         Some(p) => p,
     };
-    let root = project::find_project_root(path);
+    let root = project::find_project_root(&path);
     match root {
         Some(path) => {
             output::stdout(&path.display().to_string());
