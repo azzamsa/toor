@@ -14,4 +14,11 @@ pub struct Opts {
     /// the search will start from the current working directory.
     #[arg(help = "Path to search", long_help)]
     pub path: Option<PathBuf>,
+
+    /// Replace default root pattern
+    ///
+    /// Optional pattern to replace default root pattern.
+    /// Usage: `--root-pattern ".project,.git`
+    #[arg(short, long = "roots", value_delimiter = ',')]
+    pub root_pattern: Option<Vec<String>>,
 }

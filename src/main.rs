@@ -20,18 +20,32 @@ fn main() {
 
 fn run() -> miette::Result<ExitCode> {
     let opts = Opts::parse();
-    let _config = Config {};
+    let path = &opts.path.clone();
 
-    let path = match opts.path {
-        None => std::env::current_dir().unwrap(),
-        Some(p) => p,
+    let current_dir = match std::env::current_dir() {
+        Ok(path) => path,
+        Err(e) => return Err(crate::Error::Internal(e.to_string()).into()),
     };
-    let root = project::find_project_root(&path);
+
+    let path = match path {
+        Some(p) => p.as_path(),
+        None => &current_dir,
+    };
+
+    let config = construct_config(opts);
+
+    let root = project::find_project_root(path, config);
     match root {
         Some(path) => {
             output::stdout(&path.display().to_string());
             Ok(ExitCode::Success)
         }
         None => Err(Error::RootNotFound.into()),
+    }
+}
+
+fn construct_config(opts: Opts) -> Config {
+    Config {
+        root_pattern: opts.root_pattern,
     }
 }

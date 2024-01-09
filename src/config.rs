@@ -1,2 +1,4 @@
 #[derive(Debug, Clone)]
-pub struct Config {}
+pub struct Config {
+    pub root_pattern: Option<Vec<String>>,
+}
