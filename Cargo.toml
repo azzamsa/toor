@@ -8,7 +8,7 @@ exclude = ["/README.md"]
 keywords = ["cli", "root"]
 license = "MIT"
 repository = "https://github.com/azzamsa/toor"
-rust-version = "1.73.0"
+rust-version = "1.78.0"
 description = "Find project root"
 
 [profile.release]
@@ -19,16 +19,16 @@ panic = 'abort'
 
 [dependencies]
 # cli
-clap = { version = "4.4.14", features = ["derive"] }
+clap = { version = "4.5.7", features = ["derive"] }
 
 # error
-miette = { version = "5.10", features = ["fancy"] }
+miette = { version = "7.2", features = ["fancy"] }
 thiserror = "1.0"
 
 [dev-dependencies]
-assert_cmd = "2.0.12"
-assert_fs = "1.1.0"
-predicates = "3.0"
+assert_cmd = "2.0.14"
+assert_fs = "1.1.1"
+predicates = "3.1"
 
 [package.metadata.binstall]
 pkg-url = "{ repo }/releases/download/v{ version }/{ name }-{ version}-{ target }.tar.gz"
