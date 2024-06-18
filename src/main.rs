@@ -1,5 +1,5 @@
 #![deny(unsafe_code)]
-use std::process;
+use std::{process, sync::Arc};
 
 use clap::Parser;
 
@@ -19,22 +19,19 @@ fn main() {
 }
 
 fn run() -> miette::Result<ExitCode> {
-    let opts = Opts::parse();
-    let path = &opts.path.clone();
+    let opts = Arc::new(Opts::parse());
 
     let current_dir = match std::env::current_dir() {
-        Ok(path) => path,
+        Ok(current_dir) => current_dir,
         Err(e) => return Err(crate::Error::Internal(e.to_string()).into()),
     };
-
-    let path = match path {
-        Some(p) => p.as_path(),
+    let path = match &opts.path {
+        Some(path) => path,
         None => &current_dir,
     };
 
-    let config = construct_config(opts);
-
-    let root = project::find_project_root(path, config);
+    let config = construct_config(Arc::clone(&opts))?;
+    let root = project::find_project_root(path.to_path_buf(), config);
     match root {
         Some(path) => {
             output::stdout(&path.display().to_string());
@@ -44,8 +41,10 @@ fn run() -> miette::Result<ExitCode> {
     }
 }
 
-fn construct_config(opts: Opts) -> Config {
-    Config {
+fn construct_config(opts: Arc<Opts>) -> Result<Config, crate::Error> {
+    let opts =
+        Arc::try_unwrap(opts).map_err(|_| Error::Internal("Failed to unwrap Opts".to_string()))?;
+    Ok(Config {
         root_pattern: opts.root_pattern,
-    }
+    })
 }

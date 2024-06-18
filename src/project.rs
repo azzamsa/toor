@@ -1,4 +1,4 @@
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use crate::config::Config;
 
@@ -18,7 +18,7 @@ const PROJECT_ROOT_MARKS: [&str; 9] = [
 ];
 
 #[must_use]
-pub fn find_project_root(path: &Path, config: Config) -> Option<PathBuf> {
+pub fn find_project_root(path: PathBuf, config: Config) -> Option<PathBuf> {
     let root_pattern = match config.root_pattern {
         Some(pattern) => pattern,
         None => PROJECT_ROOT_MARKS
@@ -27,7 +27,7 @@ pub fn find_project_root(path: &Path, config: Config) -> Option<PathBuf> {
             .collect(),
     };
 
-    let mut current_path = Some(path.to_path_buf());
+    let mut current_path = Some(path);
 
     while let Some(ref path_buf) = current_path {
         // Check if any marks exist in the current directory
@@ -35,7 +35,7 @@ pub fn find_project_root(path: &Path, config: Config) -> Option<PathBuf> {
             .iter()
             .any(|file_name| path_buf.join(file_name).exists())
         {
-            return current_path.clone();
+            return current_path;
         }
 
         // Move to the parent directory
