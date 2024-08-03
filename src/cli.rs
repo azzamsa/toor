@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Parser;
 
-#[derive(Parser)]
+#[derive(Parser, Debug, Clone)]
 #[command(
     name = "toor",
     version,
