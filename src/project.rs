@@ -15,6 +15,7 @@ const PROJECT_ROOT_MARKS: [&str; 9] = [
     ".bzr",      // Bazaar VCS root dir
     "_darcs",    // Darcs VCS root dir
     ".pijul",    // Pijul VCS root dir
+    ".jj",       // Jujutsu VCS root dir
 ];
 
 #[must_use]
