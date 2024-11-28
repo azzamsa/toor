@@ -4,7 +4,7 @@ use crate::config::Config;
 
 /// A list of files considered to mark the root of a project.
 /// `https://github.com/bbatsov/projectile/blob/71f18add5e66201c3ea7c9650b848968db3aec42/projectile.el#L326`
-const PROJECT_ROOT_MARKS: [&str; 9] = [
+const PROJECT_ROOT_MARKS: &[&str] = &[
     ".project",    // Default project mark for Emacs
     ".projectile", // Default project mark for Projectile
     //
