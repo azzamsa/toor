@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2024-12-12
+
+### Features
+
+- Add Jujutsu support ([b38522a](https://github.com/azzamsa/toor/commit/b38522a81d69c8b65f1dd37f78dcdeab8d35c6b6))
+
+### Bug fixes
+
+- Failed to unwrap `Opts` for no reason ([73913f1](https://github.com/azzamsa/toor/commit/73913f111c095c6ee71e193064bd3d4d7a1367df))
+
 ## [0.3.0] - 2024-01-09
 
 ### Features
