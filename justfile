@@ -52,6 +52,10 @@ lint:
 test:
     cargo nextest run
 
+[doc('Install app locally')]
+install:
+    cargo install --path .
+
 [doc('Create a new release. Example `cargo-release release minor --tag-name v0.2.0`')]
 release level:
     cargo-release release {{ level }} --execute
@@ -75,8 +79,9 @@ _release-prepare version:
 up arg="":
     #!/usr/bin/env bash
     if [ "{{ arg }}" = "--write" ]; then
-        cargo upgrade
+        cargo upgrade --incompatible --recursive --verbose
         cargo update
+        dprint config update
     else
         cargo outdated --root-deps-only
     fi;
